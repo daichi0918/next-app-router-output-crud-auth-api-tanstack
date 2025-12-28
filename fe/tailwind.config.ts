@@ -1,0 +1,13 @@
+import type { Config } from 'tailwindcss';
+
+const config: Config = {
+  content: [
+    './app/**/*.{js,ts,jsx,tsx}',
+    './features/**/*.{js,ts,jsx,tsx}',
+    './shared/**/*.{js,ts,jsx,tsx}',
+  ],
+  theme: { extend: {} },
+  plugins: [],
+};
+
+export default config;

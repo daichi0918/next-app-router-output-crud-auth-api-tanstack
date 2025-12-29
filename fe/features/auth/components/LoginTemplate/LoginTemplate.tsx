@@ -5,8 +5,7 @@ import { Controller } from 'react-hook-form';
 import Link from 'next/link';
 
 import { useLoginTemplate } from './useLoginTemplate';
-import { InputFormSection } from '@/shared/components/ui/InputFormSection';
-import { CommonButton } from '@/shared/components/ui/CommonButton';
+import { CommonButton, InputFormSection } from '@/shared/components/ui';
 import { NAVIGATION_LIST } from '@/shared/constants/navigation';
 
 export const LoginTemplate: FC = () => {

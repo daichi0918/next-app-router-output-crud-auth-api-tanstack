@@ -1,14 +1,59 @@
+'use client';
+
 import { FC } from 'react';
+import { Controller } from 'react-hook-form';
+import Link from 'next/link';
+
+import { useLoginTemplate } from './useLoginTemplate';
+import { InputFormSection } from '@/shared/components/ui/InputFormSection';
+import { CommonButton } from '@/shared/components/ui/CommonButton';
+import { NAVIGATION_LIST } from '@/shared/constants/navigation';
 
 export const LoginTemplate: FC = () => {
+  const { control, errors } = useLoginTemplate();
   return (
     <div className="w-[90%] mx-auto min-[960px]:w-1/2">
       <h1 className="text-center font-title text-white text-[48px]">Login</h1>
       <form className="w-[80%] mx-auto my-10">
-        <div className="mt-10"></div>
-        <div className="mt-10"></div>
-        <div className="mt-10"></div>
-        <div className="mt-10"></div>
+        <div className="mt-10">
+          <Controller
+            control={control}
+            name={'email'}
+            render={({ field }) => (
+              <InputFormSection
+                type="email"
+                placeholder="email"
+                errorMessage={errors.email?.message}
+                {...field}
+              />
+            )}
+          />
+        </div>
+        <div className="mt-10">
+          <Controller
+            name="password"
+            render={({ field }) => (
+              <InputFormSection
+                type="password"
+                placeholder="password"
+                errorMessage={errors.password?.message}
+                {...field}
+              />
+            )}
+            control={control}
+          />
+        </div>
+        <div className="mt-10">
+          <CommonButton type="submit">{'Login'}</CommonButton>
+        </div>
+        <div className="mt-5">
+          <Link
+            className="no-underline text-white font-bold text-[18px] hover:text-[#d87e00]"
+            href={NAVIGATION_LIST.SIGNUP}
+          >
+            &lt;&lt; to signup page
+          </Link>
+        </div>
       </form>
     </div>
   );

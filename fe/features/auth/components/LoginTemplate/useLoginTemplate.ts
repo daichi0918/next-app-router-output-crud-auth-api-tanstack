@@ -12,12 +12,17 @@ export const useLoginTemplate = () => {
     control,
     handleSubmit,
     formState: { errors },
-    setError,
-  } = useForm<z.infer<typeof schema>>({
+  } = useForm<z.input<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
       email: '',
       password: '',
     },
   });
+
+  return {
+    control,
+    errors,
+    handleSubmit,
+  };
 };

@@ -24,13 +24,17 @@ export const TodoListTemplate: FC = () => {
   });
   const searchKeyword = useWatch({ control, name: 'keyword', defaultValue: '' });
 
+  console.log('todosData:', todosData);
+
   const showTodoList = useMemo(() => {
-    const todos = todosData?.data?.todos || [];
+    const todos = Array.isArray(todosData?.data)
+      ? (todosData?.data as TodoType[])
+      : todosData?.data?.todos || [];
     const regexp = new RegExp('^' + searchKeyword, 'i');
-    return todos.filter((todo: TodoType) => {
+    return todos.filter((todo) => {
       return todo.title.match(regexp);
     });
-  }, [todosData?.data?.todos, searchKeyword]);
+  }, [todosData?.data, searchKeyword]);
 
   const handleDeleteTodo = useCallback(
     async (id: string, title: string) => {

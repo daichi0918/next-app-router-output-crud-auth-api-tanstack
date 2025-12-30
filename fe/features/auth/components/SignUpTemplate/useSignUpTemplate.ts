@@ -1,6 +1,11 @@
 import * as z from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useSignUpMutation } from '@/features/auth/hooks/useSignUpMutation';
+import { useCallback } from 'react';
+import { useRouter } from 'next/navigation';
+import { NAVIGATION_LIST } from '@/shared/constants/navigation';
+import { signIn } from 'next-auth/react';
 
 const schema = z.object({
   name: z.string().min(1, '1文字以上で入力してください'),
@@ -10,10 +15,13 @@ const schema = z.object({
 });
 
 export const useSignUpTemplate = () => {
+  const router = useRouter();
+  const signUpMutation = useSignUpMutation();
   const {
     control,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<z.input<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -24,9 +32,64 @@ export const useSignUpTemplate = () => {
     },
   });
 
+  const handleRegisterSubmit = handleSubmit(
+    useCallback(
+      async (values: z.infer<typeof schema>) => {
+        if (values.password !== values.password_confirmation) {
+          setError('password', {
+            type: 'manual',
+            message: '確認用パスワードと一致しません',
+          });
+          return;
+        }
+
+        const { name, email, password } = values;
+
+        try {
+          const response = await signUpMutation.mutateAsync({
+            name,
+            email,
+            password,
+          });
+
+          if (response.data) {
+            // 登録成功後、自動的にログインする
+            const result = await signIn('credentials', {
+              email,
+              password,
+              redirect: false,
+            });
+
+            if (result?.error) {
+              setError('email', {
+                type: 'manual',
+                message: '登録は成功しましたが、ログインに失敗しました',
+              });
+              return;
+            }
+
+            router.push(NAVIGATION_LIST.TOP);
+          } else {
+            setError('email', {
+              type: 'manual',
+              message: response.errorMessage || '登録に失敗しました',
+            });
+          }
+        } catch (error) {
+          setError('email', {
+            type: 'manual',
+            message: `登録に失敗しました: ${error}`,
+          });
+        }
+      },
+      [router, setError, signUpMutation],
+    ),
+  );
+
   return {
     control,
     errors,
-    handleSubmit,
+    handleRegisterSubmit,
+    // isLoading: signUpMutation.isPending,
   };
 };

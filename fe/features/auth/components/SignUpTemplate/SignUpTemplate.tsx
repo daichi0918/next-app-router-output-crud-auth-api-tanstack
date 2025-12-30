@@ -7,14 +7,14 @@ import { InputFormSection, CommonButton } from '@/shared/components/ui';
 import { useSignUpTemplate } from './useSignUpTemplate';
 
 export const SignUpTemplate: FC = () => {
-  const { control, errors } = useSignUpTemplate();
+  const { control, errors, handleRegisterSubmit } = useSignUpTemplate();
 
   return (
     <div className="w-[90%] mx-auto min-[960px]:w-1/2">
       <h1 className="text-center font-['Times New Roman',Times,serif] text-white text-[48px]">
         SignUp
       </h1>
-      <form className="w-[80%] mx-auto my-10">
+      <form className="w-[80%] mx-auto my-10" onSubmit={handleRegisterSubmit}>
         <div className="mt-10">
           <Controller
             name="name"

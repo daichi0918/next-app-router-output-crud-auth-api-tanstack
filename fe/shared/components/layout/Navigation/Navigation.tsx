@@ -12,8 +12,8 @@ export const Navigation = () => {
     router.push(NAVIGATION_PATH.SIGNIN);
   };
   return (
-    <div className="w-full flex justify-between items-center bg-[rgba(0,0,0,0.2)]">
-      <h1 className="pl-17.5 text-white">Todo List</h1>
+    <div className="w-full flex justify-between items-center bg-[rgba(0,0,0,0.2)] p-4">
+      <h1 className="pl-17.5 text-white font-bold text-2xl">Todo List</h1>
       <nav className="w-[40%]">
         <ul className="w-full pl-0 flex justify-around">
           <NavigationLink title={'Top'} linkPath={NAVIGATION_PATH.TOP} />

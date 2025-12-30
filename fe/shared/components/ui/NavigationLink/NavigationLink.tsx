@@ -10,7 +10,7 @@ type NavigationLinkProps = {
 export const NavigationLink: FC<NavigationLinkProps> = ({ title, linkPath }) => (
   <li className="text-center list-none">
     <Link
-      className="transition duration-300 block bg-white no-underline text-[#008080] text-2xl font-bold w-20 px-5 py-2.5 rounded-[10px] hover:bg-[#d8d8d8]"
+      className="transition duration-300 block bg-white no-underline text-[#008080] text-2xl font-bold px-5 py-2.5 rounded-[10px] hover:bg-[#d8d8d8]"
       href={linkPath}
     >
       {title}

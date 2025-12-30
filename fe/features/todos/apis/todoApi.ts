@@ -79,6 +79,8 @@ export const createTodo = async (req: CreateTodoRequest) => {
       path: 'todos',
       body: req,
     });
+    console.log('createTodo status', response.status);
+
     const data = await response.json();
     const status = response.status;
     if (status === StatusCodes.CREATED) {

@@ -67,11 +67,13 @@ export const options: NextAuthConfig = {
           throw new Error('Token is not found');
         }
 
-        user.id = res.data.user.id;
-        user.name = res.data.user.name;
-        user.email = res.data.user.email;
-        user.createdAt = res.data.user.createdAt;
-        user.updatedAt = res.data.user.updatedAt;
+        const apiUser = res.data.user;
+
+        user.id = apiUser?.id ?? '';
+        user.name = apiUser?.name ?? '';
+        user.email = apiUser?.email ?? '';
+        user.createdAt = apiUser?.createdAt ?? '';
+        user.updatedAt = apiUser?.updatedAt ?? '';
         user.token = res.data.token;
 
         return user;

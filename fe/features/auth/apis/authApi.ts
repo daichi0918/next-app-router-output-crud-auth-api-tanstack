@@ -4,14 +4,14 @@ import { StatusCodes } from 'http-status-codes';
 
 import { signOut } from '@/features/auth/config/auth';
 
-import { AuthType, LoginRequest, SignUpRequest } from '@/features/auth/types';
+import { AuthType, SignInRequest, SignUpRequest } from '@/features/auth/types';
 import { ResponseType, IErrorResponse } from '@/shared/types/ApiResponse';
 import { postFetch } from '../../../shared/apis/fetch';
 
-export const login = async (req: LoginRequest) => {
+export const signin = async (req: SignInRequest) => {
   try {
     const response = await postFetch({
-      path: 'auth/login',
+      path: 'auth/signin',
       body: req,
     });
 

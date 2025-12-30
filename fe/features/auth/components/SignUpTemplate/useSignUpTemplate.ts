@@ -34,7 +34,7 @@ export const useSignUpTemplate = () => {
 
   const handleRegisterSubmit = handleSubmit(
     useCallback(
-      async (values: z.infer<typeof schema>) => {
+      async (values: z.output<typeof schema>) => {
         if (values.password !== values.password_confirmation) {
           setError('password', {
             type: 'manual',

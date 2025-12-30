@@ -5,7 +5,7 @@ export type AuthType = {
   user: UserType;
 };
 
-export type LoginRequest = {
+export type SignInRequest = {
   email: string;
   password: string;
 };

@@ -1,5 +1,5 @@
-import { LoginTemplate } from '@/features/auth/components/LoginTemplate';
+import { SignInTemplate } from '@/features/auth/components/SignInTemplate';
 
-export default function LoginPage() {
-  return <LoginTemplate />;
+export default function SignInPage() {
+  return <SignInTemplate />;
 }

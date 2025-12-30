@@ -3,7 +3,7 @@ import Credentials from 'next-auth/providers/credentials';
 import { StatusCodes } from 'http-status-codes';
 
 import { ExtendedUser } from '@/next-auth';
-import { login, register } from '@/features/auth/apis/authApi';
+import { signin, register } from '@/features/auth/apis/authApi';
 
 import { ResponseType } from '@/shared/types/ApiResponse';
 import { AuthType } from '@/features/auth/types';
@@ -43,7 +43,7 @@ export const options: NextAuthConfig = {
 
         if (!inputName || inputName === '') {
           // ログイン処理
-          res = await login({
+          res = await signin({
             email: inputEmail,
             password: inputPassword,
           });

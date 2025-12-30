@@ -17,7 +17,10 @@ export const signin = async (req: SignInRequest) => {
 
     const data = await response.json();
     const status = response.status;
-    if (status === StatusCodes.OK) {
+
+    // treat 2xx as success
+    // if (status === StatusCodes.OK) {
+    if (response.ok) {
       const res: ResponseType<AuthType> = {
         status: status,
         data: data,

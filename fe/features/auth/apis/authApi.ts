@@ -84,5 +84,5 @@ export const register = async (req: SignUpRequest) => {
 };
 
 export const logout = async () => {
-  await signOut();
+  await signOut({ redirect: false });
 };
